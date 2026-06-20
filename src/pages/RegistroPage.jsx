@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from '../utils/constants'
+import api from '../utils/api'
 
 function RegistroPage() {
   const [nombre, setNombre] = useState('')
@@ -39,8 +40,8 @@ function RegistroPage() {
     }
 
     try {
-      await axios.post(
-        `${BASE_URL}/users`,
+      await api .post(
+        '/users',
         { name: nombre, email, password }
       )
       // Si salió bien, redirigimos al login

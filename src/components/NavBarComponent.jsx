@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { BASE_URL } from '../utils/constants'
+import api from '../utils/api'
 
 function NavBarComponent() {
   const navigate = useNavigate()
@@ -13,10 +15,7 @@ function NavBarComponent() {
 
     const obtenerPerfil = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost/trabajophp/src/public/users/${userId}`,
-          { headers: { Authorization: token } }
-        )
+        const response = await api.get(`/users/${userId}`)
         setUsuario(response.data)
       } catch (error) {
         console.error('Error al obtener perfil:', error)
@@ -28,11 +27,7 @@ function NavBarComponent() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        'http://localhost/trabajophp/src/public/logout',
-        {},
-        { headers: { Authorization: token } }
-      )
+      await api.post('/logout')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
