@@ -1,0 +1,219 @@
+/* =========================================
+   WALLYSTREET - ESTILOS GLOBALES
+   Paleta clara y corporativa (estilo banco)
+   ========================================= */
+
+/* Variables de color reutilizables en todo el proyecto */
+:root {
+    --color-primary: #0b3d91;
+    /* azul principal (header, navbar, botones) */
+    --color-primary-dark: #082c6b;
+    /* azul más oscuro para hover */
+    --color-secondary: #1976d2;
+    /* azul secundario, links y acentos */
+    --color-success: #1b8a3e;
+    /* verde, para ganancias / alza */
+    --color-danger: #c62828;
+    /* rojo, para pérdidas / baja / errores */
+    --color-bg: #f4f6f9;
+    /* fondo general de la página */
+    --color-bg-card: #ffffff;
+    /* fondo de tarjetas */
+    --color-text: #1a1a1a;
+    /* texto principal */
+    --color-text-light: #6b7280;
+    /* texto secundario / gris */
+    --color-border: #d8dee5;
+    /* bordes suaves */
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Botones ===== */
+button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+button:disabled {
+    background-color: var(--color-border);
+    color: var(--color-text-light);
+    cursor: not-allowed;
+}
+
+/* Botón de venta / acción destructiva (opcional, usar className="btn-danger") */
+.btn-danger {
+    background-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+    background-color: #9a1f1f;
+}
+
+/* ===== Inputs ===== */
+input {
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+/* ===== Header ===== */
+.header {
+    background-color: var(--color-bg-card);
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header img {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--color-primary);
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    background-color: var(--color-primary);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: #cfe0fb;
+    text-decoration: none;
+}
+
+.navbar span {
+    color: white;
+    font-size: 14px;
+    margin-right: auto;
+}
+
+.navbar button {
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.navbar button:hover {
+    background-color: #e8eef9;
+}
+
+/* ===== Footer ===== */
+.footer {
+    background-color: var(--color-bg-card);
+    border-top: 1px solid var(--color-border);
+    padding: 16px 24px;
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 13px;
+    margin-top: 40px;
+}
+
+/* ===== Tarjetas (assets, portfolio, etc) ===== */
+.card {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+}
+
+/* Indicadores de alza / baja, para usar junto con un texto o flecha */
+.precio-alza {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+.precio-baja {
+    color: var(--color-danger);
+    font-weight: 600;
+}
+
+/* ===== Mensajes de error / éxito en formularios ===== */
+.mensaje-error {
+    color: var(--color-danger);
+    background-color: #fdecea;
+    border: 1px solid var(--color-danger);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.mensaje-exito {
+    color: var(--color-success);
+    background-color: #e8f5e9;
+    border: 1px solid var(--color-success);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+/* ===== Contenedor general de página ===== */
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+}

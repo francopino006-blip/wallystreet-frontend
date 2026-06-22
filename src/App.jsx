@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import RutaProtegida from './components/RutaProtegida'
 import HeaderComponent from './components/HeaderComponent'
 import NavBarComponent from './components/NavBarComponent'
 import FooterComponent from './components/FooterComponent'
@@ -21,11 +22,12 @@ function App() {
         <Route path="/" element={<StatPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registro" element={<RegistroPage />} />
-        <Route path="/editar" element={<EditarPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/operaciones" element={<OperacionesPage />} />
-        <Route path="/panel" element={<PanelPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+
+        <Route path="/editar" element={<RutaProtegida><EditarPage /></RutaProtegida>} />
+        <Route path="/portfolio" element={<RutaProtegida><PortfolioPage /></RutaProtegida>} />
+        <Route path="/operaciones" element={<RutaProtegida><OperacionesPage /></RutaProtegida>} />
+        <Route path="/panel" element={<RutaProtegida><PanelPage /></RutaProtegida>} />
+        <Route path="/admin" element={<RutaProtegida><AdminPage /></RutaProtegida>} />
       </Routes>
 
       <FooterComponent />
