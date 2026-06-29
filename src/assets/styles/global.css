@@ -64,7 +64,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Botón de venta / acción destructiva (opcional, usar className="btn-danger") */
+/* Botón de venta / acción destructiva */
 .btn-danger {
     background-color: var(--color-danger);
 }
@@ -155,21 +155,6 @@ input:focus {
     color: var(--color-text-light);
     font-size: 13px;
     margin-top: 40px;
-}
-
-/* ===== Tarjetas (assets, portfolio, etc) ===== */
-.card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.card h3 {
-    margin-top: 0;
-    color: var(--color-primary);
 }
 
 /* Indicadores de alza / baja, para usar junto con un texto o flecha */
