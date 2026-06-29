@@ -1,33 +1,26 @@
-/* =========================================
-   WALLYSTREET - ESTILOS GLOBALES
-   Paleta clara y corporativa (estilo banco)
-   ========================================= */
-
-/* Variables de color reutilizables en todo el proyecto */
 :root {
     --color-primary: #0b3d91;
-    /* azul principal (header, navbar, botones) */
+    
     --color-primary-dark: #082c6b;
-    /* azul más oscuro para hover */
+    
     --color-secondary: #1976d2;
-    /* azul secundario, links y acentos */
+    
     --color-success: #1b8a3e;
-    /* verde, para ganancias / alza */
+    
     --color-danger: #c62828;
-    /* rojo, para pérdidas / baja / errores */
+    
     --color-bg: #f4f6f9;
-    /* fondo general de la página */
+    
     --color-bg-card: #ffffff;
-    /* fondo de tarjetas */
+    
     --color-text: #1a1a1a;
-    /* texto principal */
+    
     --color-text-light: #6b7280;
-    /* texto secundario / gris */
+    
     --color-border: #d8dee5;
-    /* bordes suaves */
+    
 }
 
-/* Reset básico */
 * {
     box-sizing: border-box;
 }
@@ -216,4 +209,56 @@ input:focus {
     max-width: 1100px;
     margin: 0 auto;
     padding: 24px;
+}
+
+/* ===== Contenedor de la Grilla  ===== */
+.assets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px 0;
+    width: 100%;
+}
+/* ===== AssetCard - Componente reutilizable ===== */
+.asset-card-item {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.asset-card-item h3 {
+    margin: 0 0 8px 0;
+    color: var(--color-primary);
+    font-size: 18px;
+    text-align: center;
+}
+
+.stat-precio {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin: 8px 0;
+    text-align: center;
+}
+
+.asset-card-content {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.asset-card-content input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.asset-card-content button {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
 }

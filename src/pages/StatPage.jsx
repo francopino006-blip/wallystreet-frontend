@@ -1,38 +1,87 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import api from '../utils/api'
 import { REFRESH_INTERVAL } from '../utils/constants'
+import './StatPage.css'
+import AssetCard from '../components/AssetCard' 
 
 function StatPage() {
   const [assets, setAssets] = useState([])
+  const [filtroNombre, setFiltroNombre] = useState('')
+  const [ordenPrecio, setOrdenPrecio] = useState('')
+  const preciosAnterioresRef = useRef({})
 
   const obtenerAssets = async () => {
     try {
       const response = await api.get('/assets')
-      setAssets(response.data)
-      console.log('Assets actualizados:', new Date().toLocaleTimeString())
+      const nuevosAssets = response.data
+
+      // Actualizamos los precios anteriores con los actuales ANTES de setear los nuevos
+      const nuevosPrevios = {}
+      nuevosAssets.forEach(a => {
+        nuevosPrevios[a.id] = preciosAnterioresRef.current[a.id] ?? a.current_price
+      })
+
+      // Guardamos los precios actuales como "anteriores" para la próxima vuelta
+      const actuales = {}
+      nuevosAssets.forEach(a => { actuales[a.id] = a.current_price })
+      preciosAnterioresRef.current = actuales
+
+      setAssets(nuevosAssets.map(a => ({
+        ...a,
+        precioAnterior: nuevosPrevios[a.id]
+      })))
+
     } catch (error) {
       console.error('Error al obtener assets:', error)
     }
   }
 
   useEffect(() => {
-    obtenerAssets() // carga inicial
-
-    const intervalo = setInterval(() => { //funcion nativa de JS que ejecuta la funcion cada cierto tiempo (REFRESH_INTERVAL) para mantener los precios actualizados
-      obtenerAssets() //se mantiene en segundo plano y cada REFRESH_INTERVAL hace una nueva consulta para actualizar los precios 
-    }, REFRESH_INTERVAL)
-
-    return () => clearInterval(intervalo) // limpia el timer al salir de la página
+    obtenerAssets()
+    const intervalo = setInterval(obtenerAssets, REFRESH_INTERVAL)
+    return () => clearInterval(intervalo)
   }, [])
 
+  const assetsFiltrados = assets
+    .filter(asset => asset.name.toLowerCase().includes(filtroNombre.toLowerCase()))
+    .sort((a, b) => {
+      if (ordenPrecio === 'asc') return a.current_price - b.current_price
+      if (ordenPrecio === 'desc') return b.current_price - a.current_price
+      return 0
+    })
+
   return (
-    <div>
-      <h2>Listado de Assets</h2>
-      {assets.map(asset => (
-        <p key={asset.id}>
-          {asset.name} - ${asset.current_price}
-        </p>
-      ))}
+    <div className="page-container">
+      <h2>Mercado de Assets</h2>
+
+      <div className="stat-filtros">
+        <input
+          type="text"
+          placeholder="Buscar por nombre..."
+          value={filtroNombre}
+          onChange={e => setFiltroNombre(e.target.value)}
+        />
+        <select value={ordenPrecio} onChange={e => setOrdenPrecio(e.target.value)}>
+          <option value="">Ordenar por precio</option>
+          <option value="asc">Precio: menor a mayor</option>
+          <option value="desc">Precio: mayor a menor</option>
+        </select>
+      </div>
+
+      <div className="assets-grid">
+        {assetsFiltrados.map(asset => {
+          const subio = asset.current_price > asset.precioAnterior
+          const bajo = asset.current_price < asset.precioAnterior
+
+          return (
+            <AssetCard key={asset.id} name={asset.name} price={asset.current_price}>
+              {subio && <span className="precio-alza">▲ Al alza</span>}
+              {bajo && <span className="precio-baja">▼ A la baja</span>}
+              {!subio && !bajo && <span>— Sin cambios</span>}
+            </AssetCard>
+          )
+        })}
+      </div>
     </div>
   )
 }

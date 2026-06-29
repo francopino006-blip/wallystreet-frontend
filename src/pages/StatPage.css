@@ -1,0 +1,15 @@
+.stat-filtros {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.stat-filtros select {
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--color-bg-card);
+    color: var(--color-text);
+    cursor: pointer;
+}

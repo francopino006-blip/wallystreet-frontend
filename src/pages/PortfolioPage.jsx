@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../utils/api'
+import AssetCard from '../components/AssetCard'
 
 function PortfolioPage() {
   const [portfolio, setPortfolio] = useState([])
@@ -64,18 +65,16 @@ function PortfolioPage() {
   }
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Mi Portfolio</h2>
 
       {perfil && <p>Dinero disponible: ${perfil.balance}</p>}
       {mensaje && <p>{mensaje}</p>}
 
-      <div>
+      <div className="assets-grid">
         {portfolio.map(item => ( // Cada item representa un activo en el portfolio
-          <div key={item.asset_id} style={{border: '1px solid white', padding: '10px', margin: '10px'}}>
-            <h3>{item.name}</h3>
+          <AssetCard key={item.asset_id} name={item.name} price={item.current_price}>
             <p>Cantidad: {item.quantity}</p>
-            <p>Precio actual: ${item.current_price}</p>
             <p>Subtotal: ${item.subtotal}</p>
 
             <input
@@ -98,7 +97,7 @@ function PortfolioPage() {
             {item.quantity === 0 && (
               <button onClick={() => handleEliminar(item.asset_id)}>Eliminar</button> // Solo muestra el botón de eliminar si la cantidad es 0 (es decir, si se vendió todo el activo)
             )}
-          </div>
+          </AssetCard>
         ))}
       </div>
     </div>

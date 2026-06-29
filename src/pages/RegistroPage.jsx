@@ -23,7 +23,8 @@ function RegistroPage() {
       nuevosErrores.push('El email debe tener un formato válido')
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
+   
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&#]).{8,}$/
     if (!password || !passwordRegex.test(password)) {
       nuevosErrores.push('La password debe tener al menos 8 caracteres, mayúsculas, minúsculas, números y caracteres especiales')
     }
